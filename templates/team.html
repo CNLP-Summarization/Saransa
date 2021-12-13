@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<head>
+  <title>Our Team</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href={{ url_for('static', filename='fav.png') }}>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/721c70a9ee.js" crossorigin="anonymous"></script>
+  <style>
+	  body,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-family: "Roboto", sans-serif
+		}
+		h3{
+			font-weight:100;
+		}
+  .w3-bar,
+  h1,
+  button {
+    font-family: "Roboto", sans-serif
+  }
+  
+  .fa-anchor,
+  .fa-coffee {
+    font-size: 200px
+  }
+  
+  .buttonrad {
+    border-radius: 12px;
+  }
+  </style>
+</head>
+<body>
+  <!-- Side Navigation -->
+  <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+    <h1 class="w3-xxxlarge w3-black">
+      <b>Summarization Engine</b>
+    </h1>
+    <a href="/" class="w3-bar-item w3-button">Home</a>
+    <a href="/summerizer" class="w3-bar-item w3-button">Summerizer</a>
+    <a href="/eval" class="w3-bar-item w3-button">Evaluate</a>
+    <a href="/history" class="w3-bar-item w3-button">History</a>
+    <a href="/team" class="w3-bar-item w3-button">Team</a>
+    <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i>
+    </button>
+  </nav>
+
+
+  <!-- Header -->
+ <header class="w3-container w3-theme w3-padding" id="myHeader">
+    <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+    <div class="w3-center">
+      <br>
+      <h1 class="w3-xxxlarge w3-animate-bottom">
+        <b>Our Team</b>
+      </h1>
+      <br>
+    </div>
+  </header>
+
+<center>
+		<div class="mx-auto content">
+	<br>			
+				<div class="row p-5">
+					<div class="col-lg-4">
+						<img style="border-radius:100%;height: 250px; width: 250px", src="{{url_for('static',filename='partha.png')}}">
+					</div>
+					<div class="col-lg-8">
+						<h3>Dr. Partha Pakray</h3>
+						<h4>Mentor</h4></br>
+					</div>
+				</div>
+	<br>			
+	<table>
+	<tr>
+	<td style="padding-right:200px;">
+	<br>			
+			<div class="row p-5">
+				<div>
+					<img style="border-radius:100%; height: 200px; width: 200px;", src="{{url_for('static',filename='pkd.jpg')}}">
+				</div>
+				<div>
+					<h4>Pankaj Kundan Dadure</h4>
+					<h5>Team Leader</br><br>
+				</div>
+			</div>
+	</td>
+	<td>
+	<br>
+				<div class="row p-5">
+					<div>
+						<img style="border-radius:100%;height: 200px; width: 200px;", src="{{url_for('static',filename='sahinur.jpg')}}">
+					</div>
+					<div>
+						<h4>Sahinur Rahman Laskar</h4>
+						<h5>Team Member</br><br>
+					</div>
+				</div>
+	</td>
+	<hr>
+	</tr>
+
+	<tr>
+	<td style="padding-right:200px">
+	
+	<br>
+				<div class="row p-5">
+					<div>
+						<img style="border-radius:100%;height: 200px; width: 200px;", src="{{url_for('static',filename='darsh.jpg')}}">
+					</div>
+					<div>
+						<h4>Darsh Kaushik</h4>
+						<h5>Team Member</br>
+					</div>
+				</div>
+	</td>
+	<td>
+	<br>
+				<div class="row p-5">
+					<div>
+						<img style="border-radius:100%;height: 200px; width: 200px", src="{{url_for('static',filename='pal.jpeg')}}">
+					</div>
+					<div>
+						<h4>Prachurya Nath</h4>
+						<h5>Team Member</br>
+					</div>
+				</div>
+	</td>
+	</tr>
+	</table>
+</center>
+	</h3>
+<br><br>
+	<!-- Footer -->
+	<footer class="w3-center w3-light-grey w3-padding-32">
+		<h4>
+			<b>Acknowledgement: <br>
+			</b>Center for Natural Language Processing <br> Department of Computer Science & Engineering, NIT Silchar <br>
+			<div class="copyright text-center mx-auto"> &copy; CNLP, NIT Silchar <br>
+			</div>
+		</h4>
+	</footer>
+	  <script>
+		// Used to toggle the menu on small screens when clicking on the menu button
+		function myFunction() {
+		  var x = document.getElementById("navDemo");
+		  if (x.className.indexOf("w3-show") == -1) {
+			x.className += " w3-show";
+		  } else {
+			x.className = x.className.replace(" w3-show", "");
+		  }
+		}
+		// Side navigation
+		function w3_open() {
+		  var x = document.getElementById("mySidebar");
+		  x.style.width = "100%";
+		  x.style.fontSize = "40px";
+		  x.style.paddingTop = "10%";
+		  x.style.display = "block";
+		}
+  
+		function w3_close() {
+		  document.getElementById("mySidebar").style.display = "none";
+		}
+	  </script>
+
+  </html>

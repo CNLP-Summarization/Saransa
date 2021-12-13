@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Summerizer</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" type="image/x-icon" href={{ url_for('static', filename='fav.png') }}>
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script src="https://kit.fontawesome.com/721c70a9ee.js" crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          font-family: "Roboto", sans-serif
+        }
+
+        .w3-bar,
+        h1,
+        button {
+          font-family: "Roboto", sans-serif
+        }
+
+        .fa-anchor,
+        .fa-coffee {
+          font-size: 200px
+        }
+
+        #footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+        }
+        #input
+          {
+              display:inline-block;
+              padding:50px 40px;
+              line-height:140%;
+          }
+        #insert
+        {
+          border-style: double;
+          width: 651px;
+          background-color: rgba(97, 107, 105, 0.158);
+        }
+
+        /* Preloder */
+
+#preloder {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    /* background: #000; */
+    background: #ffffff;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    border-radius: 60px;
+    animation: loader 0.8s linear infinite;
+    -webkit-animation: loader 0.8s linear infinite;
+}
+
+@keyframes loader {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        border: 4px solid #056d4d;      
+        /* border: 4px solid #f44336; */
+        border-left-color: transparent;
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        border: 4px solid #056d4d;
+        /* border: 4px solid #673ab7; */
+        border-left-color: transparent;
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        border: 4px solid #056d4d;
+        border-left-color: transparent;
+    }
+}
+
+@-webkit-keyframes loader {
+    0% {
+        -webkit-transform: rotate(0deg);
+        border: 4px solid #056d4d;
+        border-left-color: transparent;
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        border: 4px solid #056d4d;
+        border-left-color: transparent;
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        border: 4px solid #056d4d;
+        border-left-color: transparent;
+    }
+}
+    
+.centered {
+  position: fixed; /* or absolute */
+  top: 60%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+    
+    </style>
+  </head>
+  <body>
+  <!-- Side Navigation -->
+  <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+    <h1 class="w3-xxxlarge w3-black">
+      <b>Summarization Engine</b>
+    </h1>
+    <a href="/" class="w3-bar-item w3-button">Home</a>
+    <a href="/summerizer" class="w3-bar-item w3-button">Summerizer</a>
+    <a href="/eval" class="w3-bar-item w3-button">Evaluate</a>
+    <a href="/history" class="w3-bar-item w3-button">History</a>
+    <a href="/team" class="w3-bar-item w3-button">Team</a>
+    <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i>
+    </button>
+  </nav>
+
+    <!-- Header -->
+    <header class="w3-container w3-theme w3-padding" id="myHeader">
+      <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+      <div class="w3-center">
+        <br>
+        <h1 class="w3-xxxlarge w3-animate-bottom">
+          <b>Abstractive Summarization Tool</b>
+        </h1>
+        <br>
+      </div>
+    </header>
+    <!-- Abstractive Summarization Tool -->
+    <div style="text-align:center">
+      <form action="/result" method="POST" enctype="multipart/form-data" id="myform">
+        <p style="font-size:20px; font-weight:bold;">Enter your text</p>
+        <textarea name="text" rows="20" cols="70" placeholder="Insert your text here..."></textarea><br><br>
+        
+        <center>
+        <div id="insert" >
+        <p style="font-size:20px; font-weight:bold;  color:gray;">Insert text file for summarization</p>
+        <label for="file-upload" class="custom-file-upload"><i class="fa fa-cloud-upload"></i> <strong>Click here to upload</strong></label>
+        <br><br>
+        <input id="file-upload" name='file' type="file" style="display:none;" type="button">
+        </div>
+      </center>
+
+        <br>
+        <br>
+        <div style="font-size: 20px;"
+        <label for="sumsize">Summarization size:</label>
+        <select id="sumsize" name="number">
+          <option value="100">Default</option>
+          <option value="50">Short</option>
+          <option value="150">Long</option>
+        </select>
+      </div>
+        <br>
+        <br>
+        <button class="w3-btn w3-black w3-text-shadow w3-xlarge w3-round" value="Submit">Submit</button>
+      </form>
+      <br>
+      <br>
+    </div>
+    <div id="preloder">
+      <div class="loader">
+      </div>
+      <h2  class="centered">Generating Summary...</h2>
+  </div>
+
+	<!-- Footer -->
+	<footer class="w3-center w3-light-grey w3-padding-32">
+		<h4>
+			<b>Acknowledgement: <br>
+			</b>Center for Natural Language Processing <br> Department of Computer Science & Engineering, NIT Silchar <br>
+			<div class="copyright text-center mx-auto"> &copy; CNLP, NIT Silchar <br>
+			</div>
+		</h4>
+	</footer>
+
+    <script>
+      // Used to toggle the menu on small screens when clicking on the menu button
+      function myFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
+        }
+      }
+      // Side navigation
+      function w3_open() {
+        var x = document.getElementById("mySidebar");
+        x.style.width = "100%";
+        x.style.fontSize = "40px";
+        x.style.paddingTop = "10%";
+        x.style.display = "block";
+      }
+
+      function w3_close() {
+        document.getElementById("mySidebar").style.display = "none";
+      }
+          $(document).ready(function(){
+      $("#myform").on("submit", function(){
+        $("#preloder").fadeIn();
+      });//submit
+    });//document ready 
+      
+    </script>
+  </body>
+</html>

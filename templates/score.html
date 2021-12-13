@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Evaluation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href={{ url_for('static', filename='fav.png') }}>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/721c70a9ee.js" crossorigin="anonymous"></script>
+    <style>
+    
+    html { height:100%; }
+  body { position:absolute; top:0; bottom:0; right:0; left:0; }
+    h1,     
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Roboto", sans-serif
+    }
+    
+    .w3-bar,
+    h1,
+    button {
+      font-family: "Roboto", sans-serif
+    }
+    
+    .fa-anchor,
+    .fa-coffee {
+      font-size: 200px
+    }
+    
+    .buttonrad {
+      border-radius: 12px;
+    }
+    
+  .all
+      {
+        min-height:calc(100vh-40px);
+      }
+
+
+      #border {
+          border-radius: 25px;
+          border: 2px solid #808080;
+          padding: 20px;
+          width:80%;
+        }
+
+        #rad{
+          border-radius: 20px;
+        }
+        a {
+            text-decoration: none;
+        }
+        .seven h1 {
+        text-align: center;
+            font-size:30px; font-weight:300; color:rgb(0, 0, 0); letter-spacing:1px;
+            text-transform: uppercase;
+
+            display: grid;
+            grid-template-columns: 1fr max-content 1fr;
+            grid-template-rows: 27px 0;
+            grid-gap: 20px;
+            align-items: center;
+        }
+
+        .seven h1:after,.seven h1:before {
+            content: " ";
+            display: block;
+            border-bottom: 1px solid #000000;
+            border-top: 1px solid #000000;
+            height: 5px;
+          background-color:#f8f8f8;
+        }
+    </style>
+  </head>
+  
+  <body>
+  <div class="all">
+  <!-- Side Navigation -->
+  <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+    <h1 class="w3-xxxlarge w3-black">
+      <b>Summarization Engine</b>
+    </h1>
+    <a href="/" class="w3-bar-item w3-button">Home</a>
+    <a href="/summerizer" class="w3-bar-item w3-button">Summerizer</a>
+    <a href="/eval" class="w3-bar-item w3-button">Evaluate</a>
+    <a href="/history" class="w3-bar-item w3-button">History</a>
+    <a href="/team" class="w3-bar-item w3-button">Team</a>
+    <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i>
+    </button>
+  </nav>
+  
+   <!-- Header -->
+  <header class="w3-container w3-theme w3-padding" id="myHeader">
+    <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+    <div class="w3-center">
+      <br>
+      <h1 class="w3-xxxlarge w3-animate-bottom">
+        <b>Evaluation</b>
+      </h1>
+      <br>
+    </div>
+  </header><br><br><br>
+<center>
+    <div class="w3-row-padding w3-margin-bottom seven" id="border">
+        <h1>Evaluation Metrics</h1>
+     
+        <div class="w3-half">
+          <div class="w3-container w3-black w3-padding-16"  id="rad">
+            <div class="w3-center">
+            <div>
+              <h3>BLEU</h3>
+            </div>
+            <div>
+            <h3>{{bscore}} %</h3>
+          </div>
+        </div>
+          </div>
+        </div>
+       
+        <div class="w3-half">
+          <div class="w3-container w3-black w3-padding-16" id="rad">
+            <div class="w3-center">
+            <div>
+              <h3>ROUGE</h3>
+            </div>
+            <div>
+            <h3>{{rscore}} %</h3>
+          </div>
+        </div>
+          </div>
+        </div>
+     </div><br><br> 
+    </center>
+    <!-- <h3>{{text1}}</h3> -->
+    <footer class="w3-center w3-light-grey w3-padding-32">
+		<h4>
+			<b>Acknowledgement: <br>
+			</b>Center for Natural Language Processing <br> Department of Computer Science & Engineering, NIT Silchar <br>
+			<div class="copyright text-center mx-auto"> &copy; CNLP, NIT Silchar <br>
+			</div>
+		</h4>
+	</footer>
+
+</center>
+<script>
+  // Used to toggle the menu on small screens when clicking on the menu button
+  function myFunction() {
+    var x = document.getElementById("navDemo");
+    if(x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+  // Side navigation
+  function w3_open() {
+    var x = document.getElementById("mySidebar");
+    x.style.width = "100%";
+    x.style.fontSize = "40px";
+    x.style.paddingTop = "10%";
+    x.style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Summarization Engine | CNLP</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href={{ url_for('static', filename='fav.png') }}>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://kit.fontawesome.com/721c70a9ee.js" crossorigin="anonymous"></script>
+  <style>
+  
+  html { height:100%; }
+body { position:absolute; top:0; bottom:0; right:0; left:0; }
+  h1
+  {
+    padding: 5px;
+  }     
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Roboto", sans-serif
+  }
+  
+  .w3-bar,
+  h1,
+  button {
+    font-family: "Roboto", sans-serif
+  }
+  
+  .fa-anchor,
+  .fa-coffee {
+    font-size: 200px
+  }
+  
+  .buttonrad {
+    border-radius: 12px;
+  }
+  
+.all
+    {
+      min-height:calc(100vh-40px);
+    }
+  </style>
+</head>
+
+<body>
+<div class="all">
+
+   <!-- Side Navigation -->
+   <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+    <h1 class="w3-xxxlarge w3-black">
+      <b>Summarization Engine</b>
+    </h1>
+    <a href="/" class="w3-bar-item w3-button">Home</a>
+    <a href="/summerizer" class="w3-bar-item w3-button">Summerizer</a>
+    <a href="/eval" class="w3-bar-item w3-button">Evaluate</a>
+    <a href="/history" class="w3-bar-item w3-button">History</a>
+    <a href="/team" class="w3-bar-item w3-button">Team</a>
+    <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i>
+    </button>
+  </nav>
+
+  <!-- Header -->
+  <header class="w3-container w3-theme w3-padding" id="myHeader"> <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+    <div class="w3-center">
+      <h1 class="w3-xxxlarge w3-animate-bottom"><b>Summarization Engine</b></h1>
+      <div class="w3-padding-32">
+        <a href="/summerizer"><button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey buttonrad" style="font-weight:800;">Summrize Now!</button></a>
+      </div>
+    </div>
+  </header>
+<!-- Cards -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px">
+    <h1 class="w3-xxlarge"><b>Summarize any text with a click of a button</b></h1>
+    <p class="w3-middle w3-large">Within a minute, our summarizer can reduce articles, news data, or documents down to the most important points. Our Trained model employs natural language processing (NLP) to locate crucial information while preserving the original context. The system also gives a knowledge graph and frequency-based keywords. We also have a system in place to assess previously summarised paragraphs.</p>
+</div>
+
+  <h1 class="w3-center"><b>Key Features</b></h1>
+  <div class="w3-row-padding w3-center w3-margin-top">
+    <div class="w3-third">
+      <div class="w3-card w3-container" style="min-height:450px">
+        <br>
+        <h4><b>Abstractive Summary</b></h4>
+        <br> <i class="fa fa-file w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <p>Abstractive Text Summarization is the task of generating a short and concise summary that captures the salient ideas of the source text. The generated summaries potentially contain new phrases and sentences that may not appear in the source text.</p>
+      </div>
+    </div>
+    <div class="w3-third">
+      <div class="w3-card w3-container" style="min-height:450px">
+        <br>
+        <h4><b>Result Analysis</b></h4>
+        <br> <i class="fa fa-chart-pie w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <p>There are various analysis tools available like rouge score, BLEU score, which are only concerned with the structural evaluation of the summaries. Project mainly concerned with the semantic evaluation which analysis the summary at a deeper level rather than on the structural level.</p>
+      </div>
+    </div>
+    <div class="w3-third">
+      <div class="w3-card w3-container" style="min-height:450px">
+        <br>
+        <h4><b>Knowledge graph</b></h4>
+        <br> <i class="fa fa-users w3-margin-bottom w3-text-theme" style="font-size:120px"></i>
+        <p>Knowledge Graph is also integrated from the summary extracted. A knowledge graph, also known as a semantic network, represents a network of real-world entities i.e. objects, events, or concepts and illustrates the relationship between them. Also, the most frequent nouns are obtained with NLP Corpus</p>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</div>  
+	<!-- Footer -->
+	<footer class="w3-center w3-light-grey w3-padding-32">
+		<h4>
+			<b>Acknowledgement: <br>
+			</b>Center for Natural Language Processing <br> Department of Computer Science & Engineering, NIT Silchar <br>
+			<div class="copyright text-center mx-auto"> &copy; CNLP, NIT Silchar <br>
+			</div>
+		</h4>
+	</footer>
+
+  <script>
+  // Used to toggle the menu on small screens when clicking on the menu button
+  function myFunction() {
+    var x = document.getElementById("navDemo");
+    if(x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+  // Side navigation
+  function w3_open() {
+    var x = document.getElementById("mySidebar");
+    x.style.width = "100%";
+    x.style.fontSize = "40px";
+    x.style.paddingTop = "10%";
+    x.style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+  </script>
+</body>
+
+</html>
