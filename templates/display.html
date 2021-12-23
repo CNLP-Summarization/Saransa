@@ -143,21 +143,8 @@
         <td style="width:45%; color:grey">{{text}}</td>
         <td style="width:45%; color:purple">{{summary}}</td>    
   </tr>
-  <!-- <tr>
-    <td><img src={{ url_for('static', filename='sgraph.png') }}></td>
-    <td><img src={{ url_for('static', filename='graph.png') }}>  </td>
-  </tr> -->
 </tbody>
     </table>
-      <!-- <br><button href = '/download' > <i class="fa fa-download" aria-hidden="true"></i>
-&nbsp; Download as .txt</button><br><br><br> -->
-<!-- <div class="container">
-  <div class="progress">
-      <span class="title timer" data-from="0" data-to="{{rouge}}" data-speed="1800">{{rouge}} %</span>
-      <div class="overlay"></div>
-      <div class="left"></div>
-      <div class="right"></div> -->
-
   <br><br><button class="w3-btn w3-black w3-text-shadow w3-large w3-round" value="Submit"><a href="{{ url_for('.download_file') }}"><i class="fa fa-download" aria-hidden="true"></i>Download</a></button>
 </div>
 <br>
@@ -225,7 +212,7 @@
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-center seven">
         <h1>Knowledge Graph</h1>
-        <img src={{ url_for('static', filename=graph) }} style="width:70%" alt="knowladge graph">
+        <img src={{ url_for('static/graphs/', filename=graph) }} style="width:70%" alt="knowladge graph">
       </div>
     </div>
   </div>
