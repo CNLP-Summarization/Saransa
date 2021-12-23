@@ -84,10 +84,9 @@ def make_graph(text):
             if(len(j) == 3):
                 final_nodes.append(j)
     g = create_graph(final_nodes)
-    # plt.savefig('static/graph.png')
     new_graph_name = "graph" + str(time.time()) + ".png"
-    for filename in os.listdir('static/'):
+    for filename in os.listdir('static/graphs/'):
         if filename.startswith('graph_'):  # not to remove other images
-            os.remove('static/' + filename)
-    plt.savefig('static/' + new_graph_name)
+            os.remove('static/graphs/' + filename)
+    plt.savefig('static/graphs/' + new_graph_name)
     return new_graph_name
