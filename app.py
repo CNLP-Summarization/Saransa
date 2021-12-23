@@ -198,9 +198,9 @@ class NewsSummaryModel(pl.LightningModule):
         return AdamW(self.parameters(), lr=0.001)
            
      
-T5_CNN=pickle.load(open('T5_CNN','rb'))
+T5_CNN = pickle.load(open('T5_CNN','rb'))
 
-def summarize(text, length):
+def summarize(text, length, model_name):
     text_encoding=tokenizer(
     text,
     max_length=512,
@@ -210,7 +210,7 @@ def summarize(text, length):
     add_special_tokens=True,
     return_tensors='pt')
     
-    generated_ids=T5_CNN.model.generate(
+    generated_ids= model_name.model.generate(
     input_ids=text_encoding['input_ids'],
     attention_mask=text_encoding['attention_mask'],
     max_length=length,
@@ -301,11 +301,7 @@ def named_entity(text):
     output_path = Path('static/' + new_graph_name1)
     output_path.open("w", encoding="utf-8").write(svg)
     svg_code = open(output_path, 'rt').read()
-    # output_path.rename(output_path.with_suffix('.html'))
     return svg_code
-
-# def sumout(sentences):
-#     displacy.render(sentences, jupyter=True,style='ent')
 
 app = Flask(__name__)
 
@@ -319,8 +315,9 @@ def home():
 def sum():
     return render_template('Abstractive.html')
 
-path = "/home/sk-003/Downloads/Sumapp/SAVED_FILES/sum.txt"
-csv_path = "/home/sk-003/Downloads/Sumapp/SAVED_FILES/data.csv"
+basedir = os.path.abspath(os.path.dirname(__file__))
+path = os.path.join(basedir, 'static/results/sum.txt')
+csv_path = os.path.join(basedir, 'static/results/data.csv')
 
 @app.route("/result", methods = ['POST'])
 def submit():
@@ -333,18 +330,9 @@ def submit():
             length = int(words)
         if file.filename == "":
             text = request.form['text']
-            summary = summarize(text, length)
-            # summary = sumout(summary)
-            # make_graph_sum(summary)
+            summary = summarize(text, length, T5_CNN)
             words, freq = frequent_words(text)
             new_graph_name = make_graph(text)
-            # svg_code = named_entity(summary)
-            # with open(output_path, 'a+') as f:
-            #     f.append('<html>')
-            #     f.append(svg_code)
-            #     f.append('</html>')
-            #     print(f)
-            # full_filename = os.path.join('/home/sk-003/Downloads/Sumapp/images', 'graph2.png')
             with open(path, 'w') as f:
                 f.write(str(summary))
             with open(csv_path, 'a') as f:
@@ -356,14 +344,10 @@ def submit():
             file.save(os.path.join('static',full_filename))
             with open(f"static/{full_filename}") as f :
                 text = f.read()
-            summary = summarize(text, length)
-            # summary = sumout(summary)
-            print(summary)    
+            summary = summarize(text, length, T5_CNN) # Can we add variable of model name directly??
             words, freq = frequent_words(text)
-            # make_graph_sum(summary)
             new_graph_name = make_graph(text)
             output_path = named_entity(summary)
-            # full_filename = os.path.join('/home/sk-003/Downloads/Sumapp/images', 'graph.png')
             with open(path, 'w') as f:
                 f.write(str(summary))
             with open(csv_path, 'a') as csvfile:
@@ -371,7 +355,6 @@ def submit():
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 # writer.writeheader()
                 writer.writerow({'text': text, 'summary': summary})
-            
             time.sleep(2)
             return render_template('display.html', summary = summary, text = text, graph=new_graph_name, graph_image=full_filename, words=words, freq=freq)
 
@@ -384,8 +367,7 @@ def score():
     if request.method == 'POST':
         file = request.files['file1']
         full_filename = secure_filename(file.filename)
-        test_path = os.path.join('static',full_filename)
-        print(test_path)
+        test_path = os.path.join(basedir,'static','results',full_filename)
         file.save(test_path)
         with open(test_path) as f:
             reference = f.read()
@@ -401,14 +383,11 @@ def tscore():
     if request.method == 'POST':
         file = request.files['file2']
         full_filename = secure_filename(file.filename)
-        test_path = os.path.join('static','eval',full_filename)
-        print(test_path)
+        test_path = os.path.join(basedir,'static','eval',full_filename)
         file.save(test_path)
         df = pd.read_csv(test_path)
-        print(df)
         reference = df['Predicted'].tolist()
         hypothesis = df['Original'].tolist()
-        # print(text, text1)
         rscore1 = rouge_out(hypothesis, reference)
         bscore1 = bleu_cal(hypothesis, reference)
         return render_template('tscore.html', rscore1= rscore1, bscore1 = bscore1)
@@ -425,8 +404,7 @@ def eval():
 
 @app.route('/history')
 def history():
-    filename = '/home/sk-003/Downloads/Sumapp/SAVED_FILES/data.csv' 
-    data = pandas.read_csv(filename) 
+    data = pandas.read_csv(csv_path) 
     myData = data.values 
     return render_template('history.html',  myData=myData) 
 
